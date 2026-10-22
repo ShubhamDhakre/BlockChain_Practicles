@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 8: Merkle Tree & Blockchain Tamper Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to All Practicals</a>
+
+        <header>
+            <div class="badge">Practical 8 • Cryptographic Integrity</div>
+            <h1>Merkle Tree & Tamper Detection Visualizer</h1>
+            <p class="subtitle">
+                Interactive demonstration of a blockchain block's Merkle Tree. Modify any transaction and watch how cryptographic hash changes propagate upward to break the Merkle Root and invalidate the block.
+            </p>
+        </header>
+
+        <!-- Dynamic Integrity Status Banner -->
+        <div class="status-banner valid" id="status-banner">
+            🛡️ BLOCK INTEGRITY VALID: Merkle Root & Block Hash Verified.
+        </div>
+
+        <!-- Block Hash Display -->
+        <div class="card" style="margin-bottom: 20px; padding: 16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <span style="font-size:0.8rem; color:#94a3b8; text-transform:uppercase;">Block #1 SHA-256 Hash:</span>
+                    <div id="block-hash-display" style="font-family:monospace; font-size:0.95rem; font-weight:bold; color:#38bdf8; word-break:break-all;">Calculating...</div>
+                </div>
+                <button class="btn-reset" id="reset-btn">Reset Original Transactions</button>
+            </div>
+        </div>
+
+        <!-- Merkle Tree Visual Diagram -->
+        <div class="card">
+            <div class="card-title">🌳 Merkle Tree Architecture (Bottom-Up)</div>
+
+            <div class="tree-container">
+                <!-- Level 2: Merkle Root -->
+                <div class="tree-level">
+                    <div class="tree-node root" id="root-node" style="min-width: 340px;">
+                        <div class="node-title">Top Merkle Root (Hash of H01 + H23)</div>
+                        <div class="node-hash" id="root-hash">Computing...</div>
+                    </div>
+                </div>
+
+                <div class="tree-connector" style="width: 320px;"></div>
+
+                <!-- Level 1: Intermediate Nodes -->
+                <div class="tree-level">
+                    <div class="tree-node" id="parent-01-node">
+                        <div class="node-title">Parent Hash H_01 (H0 + H1)</div>
+                        <div class="node-hash" id="parent-01-hash">-</div>
+                    </div>
+                    <div class="tree-node" id="parent-23-node">
+                        <div class="node-title">Parent Hash H_23 (H2 + H3)</div>
+                        <div class="node-hash" id="parent-23-hash">-</div>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center; gap:36px; width:100%; max-width:580px;">
+                    <div class="tree-connector" style="width: 220px;"></div>
+                    <div class="tree-connector" style="width: 220px;"></div>
+                </div>
+
+                <div style="font-size:0.8rem; color:#94a3b8; text-transform:uppercase; margin-top:8px;">
+                    Level 0: Transaction Leaf Hashes (Editable below)
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Editable Transactions -->
+        <div class="card">
+            <div class="card-title">✏️ Live Transaction Data (Edit to Trigger Tampering)</div>
+            <div class="tx-grid">
+                <div class="tx-box">
+                    <label for="tx-0">Transaction 0 (Leaf 0)</label>
+                    <input type="text" id="tx-0" value="Alice -> Bob: 10 ETH">
+                    <div class="tx-hash" id="tx-hash-0">-</div>
+                </div>
+                <div class="tx-box">
+                    <label for="tx-1">Transaction 1 (Leaf 1)</label>
+                    <input type="text" id="tx-1" value="Bob -> Charlie: 5 ETH">
+                    <div class="tx-hash" id="tx-hash-1">-</div>
+                </div>
+                <div class="tx-box">
+                    <label for="tx-2">Transaction 2 (Leaf 2)</label>
+                    <input type="text" id="tx-2" value="Charlie -> Dave: 2 ETH">
+                    <div class="tx-hash" id="tx-hash-2">-</div>
+                </div>
+                <div class="tx-box">
+                    <label for="tx-3">Transaction 3 (Leaf 3)</label>
+                    <input type="text" id="tx-3" value="Dave -> Eve: 1 ETH">
+                    <div class="tx-hash" id="tx-hash-3">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="merkle_web.js"></script>
+</body>
+</html>

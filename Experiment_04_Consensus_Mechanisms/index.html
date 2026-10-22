@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 4: Consensus Mechanisms (PoW vs PoS)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to All Practicals</a>
+
+        <header>
+            <div class="badge">Practical 4 • Consensus Comparison</div>
+            <h1>Consensus Mechanisms: PoW vs PoS</h1>
+            <p class="subtitle">
+                Side-by-side interactive simulation of Proof of Work (computational puzzle mining) and Proof of Stake (weighted validator lottery), comparing performance, throughput, and energy efficiency.
+            </p>
+        </header>
+
+        <div class="grid">
+            <!-- PoW Simulator -->
+            <div class="card pow">
+                <div class="card-title" style="color: #f59e0b;">⛏️ Proof of Work (PoW)</div>
+                <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">
+                    Miners race to solve cryptographic puzzle. First to find a hash starting with <code style="color:#f59e0b;">000</code> earns the right to add the block.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Nonce Attempts</div>
+                        <div class="stat-value" id="pow-nonce">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Mining Time</div>
+                        <div class="stat-value" id="pow-time">0 ms</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Energy Usage</div>
+                        <div class="stat-value" id="pow-energy">0.000 J</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Difficulty Target</div>
+                        <div class="stat-value" style="color:#f59e0b;">000...</div>
+                    </div>
+                </div>
+
+                <div style="font-family: monospace; font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; margin-top: 12px; word-break: break-all;" id="pow-hash">
+                    Hash: Awaiting mining...
+                </div>
+
+                <button class="btn btn-pow" id="pow-btn">Mine PoW Block (Target: 000...)</button>
+            </div>
+
+            <!-- PoS Simulator -->
+            <div class="card pos">
+                <div class="card-title" style="color: #10b981;">🪙 Proof of Stake (PoS)</div>
+                <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:12px;">
+                    Validators are chosen pseudorandomly weighted by their staked tokens (Alice: 50 ETH, Bob: 30 ETH, Charlie: 20 ETH). Zero computational waste.
+                </p>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Selected Validator</div>
+                        <div class="stat-value" id="pos-validator" style="color:#10b981;">None yet</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Block Creation Time</div>
+                        <div class="stat-value" id="pos-time">0 ms</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Energy Usage</div>
+                        <div class="stat-value" id="pos-energy">0.000 mJ</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Consensus Type</div>
+                        <div class="stat-value" style="color:#10b981;">Stake Weighted</div>
+                    </div>
+                </div>
+
+                <div style="font-family: monospace; font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; margin-top: 12px; word-break: break-all;" id="pos-hash">
+                    Hash: Awaiting validator selection...
+                </div>
+
+                <button class="btn btn-pos" id="pos-btn">Propose PoS Block (Instant Selection)</button>
+            </div>
+        </div>
+
+        <!-- Comparative Log Table -->
+        <div class="card">
+            <div class="card-title">📋 Live Comparison Log</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Protocol</th>
+                            <th>Block</th>
+                            <th>Winner / Validator</th>
+                            <th>Nonce / Attempts</th>
+                            <th>Duration (ms)</th>
+                            <th>Energy Consumed</th>
+                            <th>Block Hash</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparison-tbody">
+                        <!-- Dynamic rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="consensus_web.js"></script>
+</body>
+</html>

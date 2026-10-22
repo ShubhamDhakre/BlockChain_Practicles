@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 3: RSA Encryption & Decryption (Web Crypto API)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to All Practicals</a>
+
+        <header>
+            <div class="badge">Practical 3 • Asymmetric Cryptography</div>
+            <h1>RSA Public Key Encryption & Decryption</h1>
+            <p class="subtitle">
+                Demonstration of RSA-OAEP 2048-bit asymmetric encryption and decryption in the browser using the native W3C Web Crypto API (`window.crypto.subtle`).
+            </p>
+        </header>
+
+        <!-- Key Generation Card -->
+        <div class="card">
+            <div class="card-title">🔑 1. RSA-OAEP Key Pair Generation</div>
+            <button class="btn" id="gen-key-btn">Generate New 2048-Bit RSA Key Pair</button>
+
+            <div class="keys-grid">
+                <div class="key-box">
+                    <div class="key-box-title">Public Key (SPKI Format / Hex)</div>
+                    <div class="key-val" id="pub-key-val">Click "Generate" above to create keys...</div>
+                </div>
+                <div class="key-box">
+                    <div class="key-box-title">Private Key (PKCS#8 Format / Hex)</div>
+                    <div class="key-val" id="priv-key-val">Click "Generate" above to create keys...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Encryption / Decryption Card -->
+        <div class="card">
+            <div class="card-title">🔒 2. Encryption & Decryption Workflow</div>
+
+            <label for="plaintext-input" style="display:block; margin-bottom:6px; color:#9ca3af; font-size:0.88rem;">
+                Original Plaintext Message:
+            </label>
+            <input type="text" id="plaintext-input" value="Blockchain Technology 7th Semester - RSA Secure Communication">
+
+            <div class="actions" style="margin-bottom: 16px;">
+                <button class="btn" id="encrypt-btn" disabled>Encrypt with Public Key</button>
+                <button class="btn" id="decrypt-btn" disabled>Decrypt with Private Key</button>
+                <button class="btn btn-secondary" id="tamper-btn" disabled>Simulate Ciphertext Tampering</button>
+            </div>
+
+            <label for="ciphertext-output" style="display:block; margin-bottom:6px; color:#9ca3af; font-size:0.88rem;">
+                Encrypted Ciphertext (Base64 Encoded):
+            </label>
+            <textarea id="ciphertext-output" rows="3" readonly placeholder="Encrypted payload will appear here..."></textarea>
+
+            <label for="decrypted-output" style="display:block; margin-bottom:6px; color:#9ca3af; font-size:0.88rem;">
+                Decrypted Output:
+            </label>
+            <input type="text" id="decrypted-output" readonly placeholder="Decrypted plaintext will be restored here...">
+
+            <div class="result-box" id="status-msg">
+                Ready. Click "Generate New 2048-Bit RSA Key Pair" to begin.
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

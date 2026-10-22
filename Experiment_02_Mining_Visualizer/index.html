@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 2: Blockchain Mining Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to All Practicals</a>
+        
+        <header>
+            <div class="badge">Practical 2 • Proof of Work</div>
+            <h1>Interactive Blockchain Mining Visualizer</h1>
+            <p class="subtitle">
+                Simulate block creation, Proof of Work (PoW), dynamic difficulty adjustment, and SHA-256 hash analysis. Observe how difficulty level impacts mining time, nonce iterations, and energy consumption.
+            </p>
+        </header>
+
+        <div class="grid">
+            <!-- Mining Controls -->
+            <div class="card">
+                <div class="card-title">⚙️ Mining Configuration</div>
+                
+                <div class="control-group">
+                    <label for="difficulty-slider">Difficulty Level (Target Leading Zeros)</label>
+                    <div class="slider-container">
+                        <input type="range" id="difficulty-slider" min="1" max="5" value="3">
+                        <span class="difficulty-val" id="difficulty-val">3</span>
+                    </div>
+                    <small style="color:#64748b; font-size: 0.78rem;">Higher difficulty exponentially increases required SHA-256 hash attempts (O(16^d)).</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="block-data">Block Payload / Transaction Data</label>
+                    <input type="text" id="block-data" placeholder="e.g. Alice pays Bob 25 ETH + Smart Contract Call">
+                </div>
+
+                <button class="btn" id="mine-btn">
+                    <span>⚡ Mine New Block</span>
+                </button>
+            </div>
+
+            <!-- Live Telemetry & Hash Inspector -->
+            <div class="card">
+                <div class="card-title">📊 Live Mining Telemetry</div>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Nonce Attempts</div>
+                        <div class="stat-value" id="stat-nonce">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Elapsed Time</div>
+                        <div class="stat-value" id="stat-time">0 ms</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Hash Rate</div>
+                        <div class="stat-value" id="stat-hashrate">0 H/s</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Simulated Energy</div>
+                        <div class="stat-value" id="stat-energy">0.000 J</div>
+                    </div>
+                </div>
+
+                <div class="hash-display">
+                    <div style="font-size:0.75rem; color:#64748b; margin-bottom:4px;">CURRENT COMPUTED SHA-256 HASH:</div>
+                    <div id="current-hash" style="color: #cbd5e1;">Awaiting mining initiation...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blockchain Ledger View -->
+        <div class="chain-section">
+            <h2 style="font-size: 1.4rem; color: #f8fafc; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                🔗 Distributed Ledger (Block Sequence)
+            </h2>
+            <div class="chain-blocks" id="chain-blocks">
+                <!-- Blocks dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <script src="visualizer.js"></script>
+</body>
+</html>

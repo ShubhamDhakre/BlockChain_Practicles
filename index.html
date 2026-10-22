@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Technology Lab Practicals | 7th Semester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --border-color: rgba(56, 189, 248, 0.2);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, var(--bg-dark) 75%);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .badge-main {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid var(--primary);
+            border-radius: 9999px;
+            color: var(--primary);
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .quickrun-bar {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quickrun-code {
+            font-family: var(--font-mono);
+            color: #38bdf8;
+            background: rgba(0,0,0,0.4);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .practicals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px var(--primary-glow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .exp-number {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 700;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+        .tag-web { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .tag-cli { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .tag-sol { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+            line-height: 1.35;
+        }
+
+        .card-aim {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.55;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border: 1px solid #38bdf8;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            box-shadow: 0 0 16px var(--primary-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--text-main);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge-main">Semester VII • Laboratory Manual & Suite</div>
+            <h1>Blockchain Technology Practicals</h1>
+            <p class="subtitle">
+                Complete, fully runnable implementation of Experiments 1 through 8 covering Blockchain Architecture, Proof of Work Mining, Web Crypto RSA, Consensus Mechanisms, Solidity Smart Contracts, RLP Encoding, Truffle & Ganache, and Merkle Trees.
+            </p>
+        </header>
+
+        <!-- Quickrun Command Helper -->
+        <div class="quickrun-bar">
+            <div>
+                <span style="font-size:0.85rem; color:#94a3b8; text-transform:uppercase; font-weight:600; display:block; margin-bottom:4px;">
+                    Terminal Quick Execution:
+                </span>
+                <span style="font-size: 0.95rem;">Run all experiments directly from your CLI with NPM:</span>
+            </div>
+            <div class="quickrun-code">npm run run-all</div>
+        </div>
+
+        <div class="practicals-grid">
+
+            <!-- Experiment 1 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 01</span>
+                        <span class="tag tag-cli">CLI & Setup</span>
+                    </div>
+                    <div class="card-title">Blockchain Environment & Principles</div>
+                    <p class="card-aim">
+                        Study of Blockchain Principles (Centralized vs Decentralized, Cryptography, Consensus) and setup of environment: Node.js, Ganache, Truffle, Hardhat, MetaMask, Geth, Infura.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_01_Environment_Setup/README.md" class="btn btn-secondary">Read Lab Manual</a>
+                    <span class="btn btn-primary" title="Run: npm run exp1">CLI: npm run exp1</span>
+                </div>
+            </div>
+
+            <!-- Experiment 2 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 02</span>
+                        <span class="tag tag-web">Web Visualizer</span>
+                    </div>
+                    <div class="card-title">Interactive Mining Visualizer & Energy</div>
+                    <p class="card-aim">
+                        Web-based interactive mining visualizer simulating block creation, Proof of Work (PoW), dynamic difficulty adjustment, SHA-256 analysis, and energy consumption impact.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_02_Mining_Visualizer/index.html" class="btn btn-primary">Launch Visualizer</a>
+                    <a href="Experiment_02_Mining_Visualizer/README.md" class="btn btn-secondary">Read Manual</a>
+                </div>
+            </div>
+
+            <!-- Experiment 3 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 03</span>
+                        <span class="tag tag-web">Web Crypto</span>
+                    </div>
+                    <div class="card-title">RSA Public Key Encryption & Decryption</div>
+                    <p class="card-aim">
+                        Implementation of 2048-bit RSA-OAEP public key encryption and private key decryption using the native browser and Node.js Web Crypto API (`crypto.subtle`).
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_03_RSA_WebCrypto/index.html" class="btn btn-primary">Launch Web App</a>
+                    <a href="Experiment_03_RSA_WebCrypto/README.md" class="btn btn-secondary">Read Manual</a>
+                </div>
+            </div>
+
+            <!-- Experiment 4 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 04</span>
+                        <span class="tag tag-web">Consensus Bench</span>
+                    </div>
+                    <div class="card-title">Consensus Mechanisms (PoW vs PoS)</div>
+                    <p class="card-aim">
+                        Develop and compare Proof of Work and Proof of Stake consensus mechanisms. Evaluate performance, throughput, energy reduction (~99.99%), and security (51% attacks).
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_04_Consensus_Mechanisms/index.html" class="btn btn-primary">Launch Simulator</a>
+                    <a href="Experiment_04_Consensus_Mechanisms/README.md" class="btn btn-secondary">Read Manual</a>
+                </div>
+            </div>
+
+            <!-- Experiment 5 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 05</span>
+                        <span class="tag tag-sol">Solidity & Remix</span>
+                    </div>
+                    <div class="card-title">Solidity Programming & Remix IDE</div>
+                    <p class="card-aim">
+                        Solidity structure: 1. Arithmetic Operations 2. Looping Statements 3. Cryptographic Functions (keccak256) 4. Contract Creation (Factory) 5. Restricted Access (onlyOwner).
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_05_Solidity_Remix/README.md" class="btn btn-primary">Remix Guide</a>
+                    <span class="btn btn-secondary" title="Run: npm run exp5">CLI: npm run exp5</span>
+                </div>
+            </div>
+
+            <!-- Experiment 6 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 06</span>
+                        <span class="tag tag-web">RLP & Ethereum</span>
+                    </div>
+                    <div class="card-title">Ethereum RLP Encoding & Decoding</div>
+                    <p class="card-aim">
+                        Recursive Length Prefix (RLP) transaction serialization and round-trip decoding. Comparative analysis highlighting an 83% size reduction and determinism vs JSON.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_06_RLP_Encoding/index.html" class="btn btn-primary">Launch Visualizer</a>
+                    <a href="Experiment_06_RLP_Encoding/README.md" class="btn btn-secondary">Read Manual</a>
+                </div>
+            </div>
+
+            <!-- Experiment 7 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 07</span>
+                        <span class="tag tag-sol">Truffle & Ganache</span>
+                    </div>
+                    <div class="card-title">Ether Transfer with Ganache & MetaMask</div>
+                    <p class="card-aim">
+                        Compile, deploy, and test an EtherTransfer smart contract to transfer Ether between accounts using Truffle migrations, Ganache local blockchain, and MetaMask.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_07_Ether_Transfer_Truffle/README.md" class="btn btn-primary">Workflow Manual</a>
+                    <span class="btn btn-secondary" title="Run: npm run exp7">CLI: npm run exp7</span>
+                </div>
+            </div>
+
+            <!-- Experiment 8 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <span class="exp-number">PRACTICAL 08</span>
+                        <span class="tag tag-web">Merkle Tree</span>
+                    </div>
+                    <div class="card-title">Merkle Trees & Tamper Detection</div>
+                    <p class="card-aim">
+                        Interactive application simulating a blockchain block, constructing binary Merkle Trees for transactions, and demonstrating real-time hash tampering and chain invalidation.
+                    </p>
+                </div>
+                <div class="card-actions">
+                    <a href="Experiment_08_Merkle_Tree_Tamper/index.html" class="btn btn-primary">Launch Visualizer</a>
+                    <a href="Experiment_08_Merkle_Tree_Tamper/README.md" class="btn btn-secondary">Read Manual</a>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>7th Semester Blockchain Lab Practicals • Developed with Web Standards & Node.js Runtime</p>
+        </footer>
+    </div>
+</body>
+</html>

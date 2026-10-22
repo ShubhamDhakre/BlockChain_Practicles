@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 6: RLP Encoding Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="nav-back">← Back to All Practicals</a>
+
+        <header>
+            <div class="badge">Practical 6 • Ethereum Serialization</div>
+            <h1>Ethereum RLP Encoding & Decoding</h1>
+            <p class="subtitle">
+                Interactive Recursive Length Prefix (RLP) transaction serializer. Understand how Ethereum encodes raw transaction fields into deterministic binary payloads and compare efficiency against JSON.
+            </p>
+        </header>
+
+        <div class="card">
+            <div class="card-title">📝 Ethereum Transaction Fields (Hex)</div>
+            <div class="form-grid">
+                <div>
+                    <label for="field-1">Field 1: Nonce</label>
+                    <input type="text" id="field-1" value="01">
+                </div>
+                <div>
+                    <label for="field-2">Field 2: Gas Limit (0x5208 = 21,000)</label>
+                    <input type="text" id="field-2" value="5208">
+                </div>
+                <div>
+                    <label for="field-3">Field 3: Gas Price (0x3b9aca00 = 1 Gwei)</label>
+                    <input type="text" id="field-3" value="3b9aca00">
+                </div>
+            </div>
+            <button class="btn" id="encode-btn">Encode & Decode Transaction</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title">⚡ Serialization Output & Analysis</div>
+
+            <label>RLP Encoded Payload (Hex Stream):</label>
+            <div class="output-box" id="encoded-hex" style="color: #38bdf8; font-size:1.05rem;">-</div>
+
+            <label style="margin-top: 14px;">Byte-Level Decomposition:</label>
+            <div class="output-box" id="breakdown">-</div>
+
+            <label style="margin-top: 14px;">Decoded Fields (Round-Trip Verification):</label>
+            <div class="output-box" id="decoded-val" style="color: #10b981;">-</div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px;">
+                <div style="background:rgba(10,15,26,0.6); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">RLP Serialized Size</div>
+                    <div id="rlp-size" style="font-family:monospace; font-size:1.3rem; color:#38bdf8; font-weight:bold; margin-top:4px;">10 Bytes</div>
+                </div>
+                <div style="background:rgba(10,15,26,0.6); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">Equivalent JSON Size</div>
+                    <div id="json-size" style="font-family:monospace; font-size:1.3rem; color:#f59e0b; font-weight:bold; margin-top:4px;">60 Bytes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="rlp_web.js"></script>
+</body>
+</html>

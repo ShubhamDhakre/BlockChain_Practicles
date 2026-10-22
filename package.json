@@ -1,0 +1,31 @@
+{
+  "name": "blockchain-practicals",
+  "version": "1.0.0",
+  "description": "Comprehensive 7th Semester Blockchain Lab Practicals (Experiments 1 to 8)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "exp1": "node Experiment_01_Environment_Setup/check_environment.js",
+    "exp2": "node Experiment_02_Mining_Visualizer/mining_cli.js",
+    "exp3": "node Experiment_03_RSA_WebCrypto/rsa_node.js",
+    "exp4": "node Experiment_04_Consensus_Mechanisms/consensus_comparison.js",
+    "exp5": "node Experiment_05_Solidity_Remix/test_solidity_simulation.js",
+    "exp6": "node Experiment_06_RLP_Encoding/rlp_demo.js",
+    "exp7": "node Experiment_07_Ether_Transfer_Truffle/simulate_transfer.js",
+    "exp8": "node Experiment_08_Merkle_Tree_Tamper/merkle_tamper_demo.js",
+    "run-all": "npm run exp1 && npm run exp2 && npm run exp3 && npm run exp4 && npm run exp5 && npm run exp6 && npm run exp7 && npm run exp8"
+  },
+  "keywords": [
+    "blockchain",
+    "cryptography",
+    "ethereum",
+    "solidity",
+    "merkle-tree",
+    "rlp",
+    "consensus",
+    "truffle",
+    "ganache"
+  ],
+  "author": "Shubham Dhakre",
+  "license": "MIT"
+}
